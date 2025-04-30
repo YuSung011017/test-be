@@ -8,9 +8,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*") // 또는 "http://13.125.73.213"
+                .allowedOrigins("http://13.125.73.213") // 또는 "*"
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowCredentials(false);
+                .allowedHeaders("*");
     }
 }
-
