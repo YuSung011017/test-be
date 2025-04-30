@@ -17,8 +17,7 @@ public class UploadController {
 
     @PostMapping("/upload")
     public UploadResponse upload(@RequestParam String fileName, @RequestParam String contentType) {
-        String url = s3Service.generatePresignedUrl(fileName, contentType);
-        return new UploadResponse(fileName, url);
+        return new UploadResponse(fileName, s3Service.generatePresignedUrl(fileName, contentType));
     }
 
     @PostMapping("/notify")
@@ -26,8 +25,8 @@ public class UploadController {
         String imageUrl = body.get("url");
 
         RestTemplate rest = new RestTemplate();
-        String gcpEndpoint = "http://10.178.0.2:8000/analyze";
-        ResponseEntity<String> response = rest.postForEntity(gcpEndpoint, Map.of("url", imageUrl), String.class);
-        return ResponseEntity.ok(response.getBody());
+        String gcpUrl = "http://10.178.0.2:8000/analyze"; // GCP 내부 IP 주소
+        ResponseEntity<String> res = rest.postForEntity(gcpUrl, Map.of("url", imageUrl), String.class);
+        return ResponseEntity.ok(res.getBody());
     }
 }
