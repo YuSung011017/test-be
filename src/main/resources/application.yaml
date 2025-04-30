@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+cloud:
+  aws:
+    credentials:
+      access-key: <ACCESS_KEY>
+      secret-key: <SECRET_KEY>
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+  s3:
+    bucket: <YOUR_BUCKET_NAME>
